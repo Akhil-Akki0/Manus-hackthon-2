@@ -1,0 +1,6 @@
+{
+  "name": "Krung Travel",
+  "description": "Welcome to Bangkok — Curated luxury villas, riverside teak houses, and sky-high suites in Bangkok, Thailand.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

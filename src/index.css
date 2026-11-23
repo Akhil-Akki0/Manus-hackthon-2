@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #1d1a1c;
+  --muted: #5c5156;
+  --light-muted: #8a7f83;
+  --orange: #f39419;
+  --star-yellow: #f7c325;
+  --heart-red: #ff4d5e;
+  --peach-top: #f7d9c6;
+  --peach-mid: #fbe7da;
+  --peach-bot: #fdf0e7;
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  background-color: #f7d9c6;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(
+    180deg,
+    #f7d9c6 0%,
+    #f7d9c6 115vh,
+    #fbe7da 175vh,
+    #fdf0e7 100%
+  );
+  min-height: 100vh;
+}
+
+@media (pointer: fine) {
+  html,
+  body,
+  body * {
+    cursor: none !important;
+  }
+}
+
+.font-display {
+  font-family: 'Gilda Display', Georgia, serif;
+}
+
+.font-ui {
+  font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Custom dot cursor */
+.krung-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 9999px;
+  --c-size: 26px;
+  width: var(--c-size);
+  height: var(--c-size);
+  margin-left: calc(var(--c-size) / -2);
+  margin-top: calc(var(--c-size) / -2);
+  background: rgba(72, 62, 68, 0.55);
+  border: 0px solid rgba(20, 16, 18, 0.9);
+  transition:
+    width 0.25s var(--out),
+    height 0.25s var(--out),
+    margin-left 0.25s var(--out),
+    margin-top 0.25s var(--out),
+    background-color 0.25s var(--out),
+    border-width 0.25s var(--out),
+    opacity 0.2s ease;
+  will-change: transform, width, height;
+}
+
+.krung-cursor.is-hover {
+  --c-size: 38px;
+  background: rgba(72, 62, 68, 0.35);
+}
+
+.krung-cursor.is-down {
+  --c-size: 44px;
+  background: transparent;
+  border-width: 5px;
+}
+
+.krung-cursor.is-rec {
+  --c-size: 50px;
+}
+
+.krung-cursor.is-rec.is-hover {
+  --c-size: 58px;
+}
+
+.krung-cursor.is-rec.is-down {
+  --c-size: 62px;
+  background: transparent;
+  border-width: 7px;
+}
+
+@media (pointer: coarse) {
+  .krung-cursor {
+    display: none;
+  }
+}
+
+/* Nav link left-in right-out underline wipe */
+.nav-link-wipe {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-link-wipe::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1.5px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.32s var(--out);
+}
+
+.nav-link-wipe:hover::after,
+.nav-link-wipe:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Hero frosted metallic gradient text */
+.hero-title-word {
+  display: inline-block;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.97) 0%,
+    rgba(255, 255, 255, 0.86) 36%,
+    rgba(255, 255, 255, 0.16) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  will-change: transform;
+}
+
+.hero-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* Cloud drifting keyframes */
+@keyframes cloudDriftFront {
+  0% {
+    transform: translate3d(-2.5%, 0, 0);
+  }
+  100% {
+    transform: translate3d(2.5%, 0, 0);
+  }
+}
+
+@keyframes cloudDriftBack {
+  0% {
+    transform: scaleX(-1) translate3d(-3%, 0%, 0);
+  }
+  100% {
+    transform: scaleX(-1) translate3d(3%, -4%, 0);
+  }
+}
+
+.cloud-front-anim {
+  animation: cloudDriftFront 26s ease-in-out infinite alternate;
+}
+
+.cloud-back-anim {
+  animation: cloudDriftBack 34s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud-front-anim,
+  .cloud-back-anim {
+    animation: none;
+  }
+}
+
+/* Popover drop-in */
+@keyframes popoverDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popover-drop {
+  animation: popoverDrop 0.25s var(--out) forwards;
+}
+
+/* Heart pop animation */
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.heart-pop {
+  animation: heartPop 0.35s var(--out);
+}
